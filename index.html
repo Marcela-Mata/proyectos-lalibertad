@@ -1134,7 +1134,7 @@ function unlockEdit() {
   toast('Bienvenido — modo edición activo ✓', 'success');
 }
 
-function lockApp() {
+window.lockApp = function lockApp() {
   isEditMode = false;
   pinEntry = '';
   updatePinDots();
@@ -1150,6 +1150,13 @@ function applyMode() {
     el.style.display = isEditMode ? 'flex' : 'none';
   });
 }
+
+// Expose PIN functions globally
+window.pinPress = pinPress;
+window.pinDel = pinDel;
+window.pinView = pinView;
+window.unlockEdit = unlockEdit;
+window.lockApp = lockApp;
 
 // Override showSD and showCD to hide edit/delete buttons in view mode
 const _origShowSD = window.showSD;
