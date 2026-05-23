@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos La Libertad</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0e15;--bg2:#111520;--bg3:#181d2b;--bg4:#1f2535;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#eef0f7;--text2:#8893aa;--text3:#4e5770;--accent:#2563eb;--accent2:#60a5fa;--accentbg:rgba(37,99,235,0.12);--green:#10b981;--greenbg:rgba(16,185,129,0.1);--amber:#f59e0b;--amberbg:rgba(245,158,11,0.1);--red:#ef4444;--redbg:rgba(239,68,68,0.1);--purple:#8b5cf6;--purplebg:rgba(139,92,246,0.1);--r:10px;--rl:16px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;overflow-x:hidden;font-size:15px;}
+#sidebar{width:235px;min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto;}
+.s-logo{padding:18px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.s-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#fff;flex-shrink:0;}
+.s-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.3;}
+.s-sub{font-size:10px;color:var(--text3);}
+.s-nav{flex:1;padding:8px;display:flex;flex-direction:column;gap:1px;}
+.s-lbl{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;padding:10px 8px 4px;}
+.s-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;}
+.s-item:hover{background:var(--bg3);color:var(--text);}
+.s-item.active{background:var(--accentbg);color:var(--accent2);}
+.s-item svg{width:16px;height:16px;flex-shrink:0;}
+.sbadge{margin-left:auto;color:#fff;font-size:10px;font-weight:600;border-radius:20px;padding:1px 7px;}
+.bg-gr{background:var(--green);}.bg-pu{background:var(--purple);}
+.sdiv{border:none;border-top:1px solid var(--border);margin:5px 8px;}
+.s-foot{padding:12px 14px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);}
+.dept-tag{background:var(--accentbg);color:var(--accent2);font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:4px;display:inline-block;}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;animation:pulse 2s infinite;}
+.sync-dot.off{background:var(--amber);animation:none;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+#main{margin-left:235px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;}
+.tbt{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;flex:1;}
+.tbs{font-size:13px;color:var(--text3);font-weight:400;margin-left:8px;font-family:'DM Sans',sans-serif;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;border:none;font-family:'DM Sans',sans-serif;}
+.btn-gr{background:var(--green);color:#fff;}.btn-gr:hover{background:#059669;}
+.btn-pu{background:var(--purple);color:#fff;}.btn-pu:hover{background:#7c3aed;}
+.btn-gh{background:var(--bg3);color:var(--text2);border:1px solid var(--border2);}.btn-gh:hover{background:var(--bg4);color:var(--text);}
+.btn-da{background:var(--redbg);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+.btn-sm{padding:6px 12px;font-size:12px;}
+#content{padding:22px;flex:1;}
+.view{display:none;}.view.active{display:block;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.sc-bl::before{background:var(--accent);}.sc-gr::before{background:var(--green);}.sc-pu::before{background:var(--purple);}.sc-am::before{background:var(--amber);}
+.slbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.sval{font-family:'Syne',sans-serif;font-weight:700;font-size:26px;}
+.ssub{font-size:11px;color:var(--text3);margin-top:3px;}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.sec-title{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;}
+.badge-gr{background:var(--greenbg);color:var(--green);font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;}
+.badge-pu{background:var(--purplebg);color:var(--purple);font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;}
+.filter-row{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.fchip{padding:5px 13px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);transition:all .15s;}
+.fchip:hover{background:var(--bg4);color:var(--text);}
+.fchip.active{background:var(--accentbg);color:var(--accent2);border-color:rgba(37,99,235,.3);}
+.sbox{margin-left:auto;position:relative;}
+.sbox input{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 11px 7px 32px;font-size:12.5px;color:var(--text);outline:none;width:190px;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.sbox input:focus{border-color:var(--accent);width:220px;}
+.sico{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);}
+.sico svg{width:14px;height:14px;display:block;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;}
+.pcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:17px;cursor:pointer;transition:all .2s;position:relative;}
+.pcard:hover{border-color:var(--border2);transform:translateY(-2px);background:var(--bg3);}
+.tbar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--rl) var(--rl) 0 0;}
+.tbar-s{background:var(--green);}.tbar-c{background:var(--purple);}
+.ptop{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;margin-top:5px;}
+.dpill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--accentbg);color:var(--accent2);}
+.schip{font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:20px;}
+.ch-Activo{background:var(--greenbg);color:var(--green);}
+.ch-Pausado{background:var(--amberbg);color:var(--amber);}
+.ch-Completado{background:rgba(96,165,250,.1);color:#60a5fa;}
+.ch-riesgo{background:var(--redbg);color:var(--red);}
+.ch-Finalizada{background:var(--greenbg);color:var(--green);}
+.ch-proceso{background:var(--purplebg);color:var(--purple);}
+.ch-Pendiente{background:var(--amberbg);color:var(--amber);}
+.ch-Reprogramado{background:rgba(167,139,250,.1);color:#a78bfa;}
+.ch-Suspendida{background:var(--redbg);color:var(--red);}
+.pname{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;margin-bottom:3px;}
+.pdesc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:11px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.plbl{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:4px;}
+.ptrack{height:4px;background:var(--bg4);border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.pfill{height:100%;border-radius:10px;transition:width .5s;}
+.pmeta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3);}
+.pdots{display:flex;gap:4px;margin-left:auto;}
+.pdot{width:7px;height:7px;border-radius:50%;border:1.5px solid var(--border2);}
+.pdot.on{border-color:var(--green);background:var(--green);}
+.ccard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:17px;cursor:pointer;transition:all .2s;position:relative;}
+.ccard:hover{border-color:rgba(139,92,246,.3);transform:translateY(-2px);background:var(--bg3);}
+.cstats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
+.cs{background:var(--bg3);border-radius:8px;padding:7px 10px;}
+.csl{font-size:10px;color:var(--text3);margin-bottom:2px;}
+.csv2{font-size:13px;font-weight:500;}
+.crow{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:8px;padding:11px 14px;margin-bottom:7px;cursor:pointer;transition:all .15s;}
+.crow:hover{background:var(--bg3);}
+.empty-state{text-align:center;padding:46px 20px;background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--rl);grid-column:1/-1;}
+.ei{font-size:36px;margin-bottom:10px;}
+.et{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;margin-bottom:5px;}
+.es{font-size:12px;color:var(--text2);}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);background:none;border:none;cursor:pointer;margin-bottom:16px;}
+.back-btn:hover{color:var(--text);}
+.dcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:18px;}
+.dcard-t{font-family:'Syne',sans-serif;font-weight:600;font-size:11px;color:var(--text3);margin-bottom:14px;text-transform:uppercase;letter-spacing:.8px;}
+.irow{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;gap:10px;}
+.irow:last-child{border-bottom:none;}
+.ik{color:var(--text3);flex-shrink:0;}.iv{color:var(--text);font-weight:500;text-align:right;max-width:200px;}
+.ulog{display:flex;flex-direction:column;}
+.ue{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.ue:last-child{border-bottom:none;}
+.ud{color:var(--text3);white-space:nowrap;min-width:65px;}.ut{color:var(--text2);flex:1;}.up{color:var(--accent2);font-weight:600;white-space:nowrap;}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px;}
+.mc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.mc-hdr{padding:10px 13px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.mc-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.mc-lbl{font-size:11.5px;font-weight:500;}
+.mc-sub{font-size:10px;color:var(--text3);}
+.mc-photos{padding:8px;display:flex;flex-wrap:wrap;gap:5px;min-height:78px;align-items:flex-start;}
+.ph-thumb{width:62px;height:62px;border-radius:6px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
+.ph-add{width:62px;height:62px;border-radius:6px;background:var(--bg3);border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:10px;color:var(--text3);gap:2px;}
+.ph-add:hover{border-color:var(--accent);color:var(--accent2);}
+.ph-add svg{width:16px;height:16px;}
+.ph-wrap{position:relative;width:62px;height:62px;}
+.ph-del{position:absolute;top:-5px;right:-5px;width:16px;height:16px;border-radius:50%;background:var(--red);border:none;color:#fff;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.76);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:28px 16px;overflow-y:auto;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);width:100%;max-width:660px;padding:24px;animation:su .22s ease;}
+@keyframes su{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.mhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.mtitle{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;}
+.mclose{width:30px;height:30px;border-radius:7px;background:var(--bg3);border:none;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mclose:hover{background:var(--bg4);color:var(--text);}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg label{font-size:11.5px;color:var(--text2);font-weight:500;}
+.fg input,.fg select,.fg textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 11px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border .15s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);}
+.fg textarea{resize:vertical;min-height:65px;}
+.fg select option{background:var(--bg3);}
+.fgrid{display:grid;gap:13px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.fdiv{border:none;border-top:1px solid var(--border);margin:2px 0;}
+.fsec{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+.rw{display:flex;align-items:center;gap:10px;}
+.rw input[type=range]{flex:1;padding:0;height:4px;accent-color:var(--accent);}
+.rv{font-size:13px;font-weight:500;color:var(--accent2);min-width:34px;text-align:right;}
+.mtags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
+.mtag{background:var(--accentbg);color:var(--accent2);font-size:11.5px;padding:3px 9px;border-radius:20px;display:flex;align-items:center;gap:4px;}
+.mtag button{background:none;border:none;color:var(--accent2);cursor:pointer;font-size:13px;line-height:1;}
+.meminp{display:flex;gap:7px;}.meminp input{flex:1;}
+.pm-sec{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:6px;}
+.pm-hdr{padding:9px 13px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.pm-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;}
+.pm-lbl{font-size:12px;font-weight:500;}
+.pm-body{padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px;min-height:54px;align-items:flex-start;}
+.pm-tw{position:relative;width:56px;height:56px;}
+.pm-th{width:56px;height:56px;border-radius:6px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
+.pm-rm{position:absolute;top:-5px;right:-5px;width:15px;height:15px;border-radius:50%;background:var(--red);border:none;color:#fff;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;}
+.pm-add{width:56px;height:56px;border-radius:6px;background:var(--bg3);border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:9px;color:var(--text3);gap:2px;}
+.pm-add:hover{border-color:var(--accent);color:var(--accent2);}
+.pm-add svg{width:15px;height:15px;}
+.import-area{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:26px;}
+.bigdrop{border:2px dashed var(--border2);border-radius:var(--r);padding:40px 24px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:14px;}
+.bigdrop:hover,.bigdrop.dragover{border-color:var(--purple);background:var(--purplebg);}
+.hint{font-size:12px;color:var(--text3);text-align:center;margin-top:8px;}
+.hint a{color:var(--accent2);cursor:pointer;text-decoration:underline;}
+.csv-table{width:100%;border-collapse:collapse;font-size:12px;}
+.csv-table th{background:var(--bg3);color:var(--text2);font-weight:500;padding:7px 10px;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+.csv-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2);}
+.dist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;margin-bottom:20px;}
+.dist-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:13px 15px;cursor:pointer;transition:all .15s;}
+.dist-card:hover{border-color:var(--border2);background:var(--bg3);}
+.dist-name{font-family:'Syne',sans-serif;font-weight:600;font-size:12.5px;margin-bottom:5px;}
+.dist-counts{display:flex;gap:8px;font-size:10.5px;}
+.dc-s{color:var(--green);}.dc-c{color:var(--purple);}
+.dist-bar{height:3px;background:var(--bg4);border-radius:10px;margin-top:8px;overflow:hidden;display:flex;gap:1px;}
+.db-s{height:100%;background:var(--green);}.db-c{height:100%;background:var(--purple);}
+.lb{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.92);align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb-img{max-width:90vw;max-height:85vh;border-radius:10px;object-fit:contain;}
+.lb-close{position:fixed;top:18px;right:22px;background:var(--bg3);border:none;color:var(--text);cursor:pointer;font-size:18px;border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;}
+#tc{position:fixed;bottom:18px;right:18px;z-index:999;display:flex;flex-direction:column;gap:6px;}
+.toast{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--text);display:flex;align-items:center;gap:7px;animation:fi .2s ease;min-width:210px;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.toast.success{border-left:3px solid var(--green);}.toast.error{border-left:3px solid var(--red);}.toast.info{border-left:3px solid var(--accent2);}
+@keyframes fi{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:none;}}
+.loading-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.7);align-items:center;justify-content:center;flex-direction:column;gap:14px;}
+.loading-overlay.show{display:flex;}
+.spinner{width:40px;height:40px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.vid-upload{border:1.5px dashed var(--border2);border-radius:8px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;font-size:12px;color:var(--text3);}
+.vid-upload:hover{border-color:var(--accent);color:var(--accent2);background:var(--accentbg);}
+.vid-preview{width:100%;border-radius:8px;margin-top:8px;max-height:160px;}
+.pin-overlay{display:none;position:fixed;inset:0;z-index:500;background:var(--bg);align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.pin-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:32px 28px;text-align:center;width:100%;max-width:320px;}
+.pin-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:6px;}
+.pin-sub{font-size:12px;color:var(--text3);margin-bottom:20px;}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:20px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border2);transition:all .2s;}
+.pin-dot.filled{background:var(--accent);border-color:var(--accent);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.pin-btn{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:14px;font-size:18px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;font-family:'Syne',sans-serif;}
+.pin-btn:hover{background:var(--bg4);border-color:var(--accent);}
+.pin-btn:active{transform:scale(.95);}
+.pin-del{background:var(--redbg);color:var(--red);border-color:rgba(239,68,68,.2);}
+.pin-error{color:var(--red);font-size:12px;margin-top:8px;display:none;}
+.view-badge{background:var(--greenbg);color:var(--green);font-size:10px;padding:2px 8px;border-radius:20px;margin-left:6px;}
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div style="font-size:13px;color:var(--text2);" id="loading-msg">Conectando con Firebase...</div>
+</div>
+
+<!-- PIN OVERLAY -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div style="font-size:32px;margin-bottom:10px;">🔐</div>
+    <div class="pin-title">Proyectos La Libertad</div>
+    <div class="pin-sub">Ingresa tu PIN para editar, o presiona <strong>Ver</strong> para solo visualizar</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-pad" id="pin-pad">
+      <button class="pin-btn" data-digit="1">1</button>
+      <button class="pin-btn" data-digit="2">2</button>
+      <button class="pin-btn" data-digit="3">3</button>
+      <button class="pin-btn" data-digit="4">4</button>
+      <button class="pin-btn" data-digit="5">5</button>
+      <button class="pin-btn" data-digit="6">6</button>
+      <button class="pin-btn" data-digit="7">7</button>
+      <button class="pin-btn" data-digit="8">8</button>
+      <button class="pin-btn" data-digit="9">9</button>
+      <button class="pin-btn pin-del" id="pin-del-btn">⌫</button>
+      <button class="pin-btn" data-digit="0">0</button>
+      <button class="pin-btn" id="pin-view-btn" style="background:var(--accentbg);color:var(--accent2);border-color:rgba(37,99,235,.3);font-size:13px;">👁 Ver</button>
+    </div>
+    <div class="pin-error" id="pin-error">PIN incorrecto. Intenta de nuevo.</div>
+  </div>
+</div>
+
+<nav id="sidebar">
+  <div class="s-logo">
+    <div class="s-mark">LL</div>
+    <div><div class="s-title">Proyectos</div><div class="s-sub">Dpto. La Libertad</div></div>
+  </div>
+  <div class="s-nav">
+    <div class="s-lbl">Principal</div>
+    <button class="s-item active" onclick="showView('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
+    <button class="s-item" onclick="showView('districts')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Distritos</button>
+    <hr class="sdiv">
+    <div class="s-lbl">🤝 Proyectos Sociales</div>
+    <button class="s-item" onclick="showView('social')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Ver todos <span class="sbadge bg-gr" id="sc">0</span></button>
+    <button class="s-item edit-only" onclick="openSM('new')" style="color:var(--green)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Nuevo proyecto social</button>
+    <hr class="sdiv">
+    <div class="s-lbl">🛣️ Proyectos de Calles</div>
+    <button class="s-item" onclick="showView('calles')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      Ver todas <span class="sbadge bg-pu" id="cc">0</span></button>
+    <button class="s-item edit-only" onclick="openCM('new')" style="color:var(--purple)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Nueva calle</button>
+    <button class="s-item edit-only" onclick="showView('imp')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importar Excel/CSV</button>
+  </div>
+  <div class="s-foot">
+    <div class="dept-tag">LA LIBERTAD · 22 DISTRITOS</div>
+    <div style="margin-top:6px;display:flex;align-items:center;"><span class="sync-dot" id="sync-dot"></span><span id="sync-status" style="font-size:11px;">Conectado · Firebase</span></div>
+    <div style="font-size:10px;color:var(--amber);margin-top:4px;">📷 Fotos/videos: solo en este dispositivo</div>
+    <button id="lock-btn" style="margin-top:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--text3);cursor:pointer;width:100%;">🔒 Cerrar sesión</button>
+    <div id="td" style="font-size:11px;margin-top:3px;"></div>
+  </div>
+</nav>
+
+<div id="main">
+  <div id="topbar">
+    <div class="tbt" id="tbt">Dashboard <span class="tbs"></span></div>
+    <div style="display:flex;gap:7px;" id="edit-btns">
+      <button class="btn btn-gr btn-sm" onclick="openSM('new')">+ Proyecto Social</button>
+      <button class="btn btn-pu btn-sm" onclick="openCM('new')">+ Calle</button>
+    </div>
+    <div id="view-mode-badge" style="display:none;background:var(--greenbg);color:var(--green);font-size:11px;padding:4px 12px;border-radius:20px;">👁 Modo visualización</div>
+  </div>
+  <div id="content">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="stats-row" id="stats-row"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><span style="font-size:16px;">🤝</span><div style="font-family:'Syne',sans-serif;font-weight:600;font-size:13px;">Estado — Proyectos Sociales</div></div>
+          <div id="s-board" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--rl);padding:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><span style="font-size:16px;">🛣️</span><div style="font-family:'Syne',sans-serif;font-weight:600;font-size:13px;">Estado — Calles</div></div>
+          <div id="c-board" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div class="sec-hdr"><div class="sec-title">🤝 Últimos proyectos sociales</div><span class="badge-gr" id="dsb">0</span></div>
+          <div id="dsg"></div>
+        </div>
+        <div>
+          <div class="sec-hdr"><div class="sec-title">🛣️ Últimas calles</div><span class="badge-pu" id="dcb">0</span></div>
+          <div id="dcl"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="view" id="view-social">
+      <div class="filter-row">
+        <button class="fchip active" onclick="setSF('all',this)">Todos</button>
+        <button class="fchip" onclick="setSF('Activo',this)">Activos</button>
+        <button class="fchip" onclick="setSF('Completado',this)">Completados</button>
+        <button class="fchip" onclick="setSF('Pausado',this)">Pausados</button>
+        <button class="fchip" onclick="setSF('En riesgo',this)">En riesgo</button>
+        <button class="fchip" onclick="setSF('Reprogramado',this)">Reprogramados</button>
+        <div class="sbox"><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><input type="text" id="ss" placeholder="Buscar…" oninput="renderS()"></div>
+      </div>
+      <div class="pgrid" id="sg"></div>
+    </div>
+
+    <!-- CALLES -->
+    <div class="view" id="view-calles">
+      <div class="filter-row">
+        <button class="fchip active" onclick="setCF('all',this)">Todas</button>
+        <button class="fchip" onclick="setCF('Finalizada',this)">Finalizadas</button>
+        <button class="fchip" onclick="setCF('En proceso',this)">En proceso</button>
+        <button class="fchip" onclick="setCF('Pendiente',this)">Pendientes</button>
+        <button class="fchip" onclick="setCF('Suspendida',this)">Suspendidas</button>
+        <div class="sbox"><div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><input type="text" id="cs" placeholder="Buscar calle o distrito…" oninput="renderC()"></div>
+      </div>
+      <div id="cdf" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;"></div>
+      <div class="pgrid" id="cg"></div>
+    </div>
+
+    <!-- IMPORT -->
+    <div class="view" id="view-imp">
+      <div class="import-area">
+        <div style="margin-bottom:16px;"><div style="font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:5px;">Importar Calles desde Excel / CSV</div>
+        <div style="font-size:12.5px;color:var(--text3);">Cada semana guarda tu Excel como CSV y súbelo aquí. Las calles se sincronizan automáticamente en Firebase.</div></div>
+        <div style="background:var(--purplebg);border:1px solid rgba(139,92,246,.2);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--text2);">
+          <strong style="color:var(--purple);">📋 Columnas:</strong> DISTRITO · CALLE · FAMILIAS BENEFICIADAS · TIPO DE INTERVENCIÓN · KILÓMETROS TRABAJADOS · FECHA DE INICIO DE INTERVENCIÓN · FECHA DE FINALIZACIÓN DE INTERVENCIÓN · DÍAS EN EJECUCIÓN · LÍDER DE LA COMUNIDAD · CONTACTO</div>
+        <div class="bigdrop" id="cdrop" onclick="document.getElementById('ccsv').click()" ondragover="dov(event,'cdrop')" ondrop="cdrop2(event)">
+          <div style="font-size:34px;margin-bottom:8px;">📊</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:4px;">Arrastra tu archivo aquí</div>
+          <div style="font-size:12px;color:var(--text3);">Excel guardado como CSV, o CSV directo</div>
+        </div>
+        <input type="file" id="ccsv" accept=".csv" style="display:none" onchange="handleCCSV(this.files[0])">
+        <div class="hint">¿No tienes el formato? <a onclick="dlTpl()">Descarga la plantilla CSV</a></div>
+        <div id="cprev" style="display:none;margin-top:18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:600;">Vista previa</div>
+            <div style="font-size:11px;color:var(--text3);" id="ccnt"></div>
+          </div>
+          <div style="overflow-x:auto;"><table class="csv-table" id="ctbl"></table></div>
+          <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end;">
+            <button class="btn btn-gh btn-sm" onclick="document.getElementById('cprev').style.display='none'">Cancelar</button>
+            <button class="btn btn-pu btn-sm" onclick="impCalles()">Importar a Firebase</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISTRICTS -->
+    <div class="view" id="view-districts">
+      <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:14px;margin-bottom:14px;">22 Distritos — Departamento La Libertad</div>
+      <div class="dist-grid" id="dg"></div>
+      <div id="dd" style="display:none;">
+        <button class="back-btn" onclick="hideDd()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Volver a distritos</button>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:16px;" id="ddn"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+          <div><div class="sec-hdr"><div class="sec-title">🤝 Proyectos Sociales</div></div><div id="dds"></div></div>
+          <div><div class="sec-hdr"><div class="sec-title">🛣️ Calles</div></div><div id="ddc"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL SOCIAL -->
+    <div class="view" id="view-ds">
+      <button class="back-btn" onclick="showView('social')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Volver</button>
+      <div id="dsc"></div>
+    </div>
+
+    <!-- DETAIL CALLE -->
+    <div class="view" id="view-dc">
+      <button class="back-btn" onclick="showView('calles')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Volver a calles</button>
+      <div id="dcc"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SOCIAL MODAL -->
+<div class="modal-overlay" id="sm-modal">
+  <div class="modal" style="max-width:700px;">
+    <div class="mhdr">
+      <div class="mtitle" id="sm-title">Nuevo proyecto social</div>
+      <button class="mclose" onclick="closeSM()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <form onsubmit="saveS(event)" autocomplete="off">
+      <div class="fgrid">
+        <div class="frow">
+          <div class="fg"><label>Nombre del proyecto *</label><input id="s-name" type="text" required></div>
+          <div class="fg"><label>Distrito *</label>
+            <select id="s-dist" required><option value="">— Seleccionar —</option>
+              <option>Antiguo Cuscatlán</option><option>Chiltiupán</option><option>Ciudad Arce</option><option>Colón</option><option>Comasagua</option><option>Huizúcar</option><option>Jayaque</option><option>Jicalapa</option><option>La Libertad</option><option>Nuevo Cuscatlán</option><option>Quezaltepeque</option><option>San José Villanueva</option><option>San Juan Opico</option><option>San Matías</option><option>San Pablo Tacachico</option><option>Sacacoyo</option><option>Santa Tecla</option><option>Talnique</option><option>Tamanique</option><option>Teotepeque</option><option>Tepecoyo</option><option>Zaragoza</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Descripción</label><textarea id="s-desc"></textarea></div>
+        <div class="frow">
+          <div class="fg"><label>Estado</label>
+            <select id="s-st"><option value="Activo">Activo</option><option value="Pausado">Pausado</option><option value="Completado">Completado</option><option value="En riesgo">En riesgo</option><option value="Reprogramado">Reprogramado</option></select>
+          </div>
+          <div class="fg"><label>Avance — <span id="s-pct-l">0%</span></label>
+            <div class="rw"><input type="range" id="s-pct" min="0" max="100" value="0" oninput="document.getElementById('s-pct-l').textContent=this.value+'%'"></div>
+          </div>
+        </div>
+        <hr class="fdiv"><div class="fsec">📅 Fechas clave</div>
+        <div class="frow3">
+          <div class="fg"><label>📦 Entrega de recursos</label><input id="s-fecha1" type="date"></div>
+          <div class="fg"><label>🔨 Inicio de ejecución</label><input id="s-fecha2" type="date"></div>
+          <div class="fg"><label>✅ Finalización de obra</label><input id="s-fecha3" type="date"></div>
+        </div>
+        <hr class="fdiv"><div class="fsec">👤 Líder comunitario</div>
+        <div class="frow">
+          <div class="fg"><label>Nombre del líder</label><input id="s-lider" type="text"></div>
+          <div class="fg"><label>Contacto / teléfono</label><input id="s-tel" type="text"></div>
+        </div>
+        <hr class="fdiv"><div class="fsec">👥 Equipo responsable</div>
+        <div class="fg">
+          <div class="meminp"><input id="s-mem" type="text" placeholder="Nombre" onkeydown="if(event.key==='Enter'){event.preventDefault();addSMem()}"><button type="button" class="btn btn-gh btn-sm" onclick="addSMem()">+ Agregar</button></div>
+          <div class="mtags" id="s-mtags"></div>
+        </div>
+        <hr class="fdiv"><div class="fsec">📷 Fotos por momento (1 foto por cada paso)</div>
+        <div class="pm-sec">
+          <div class="pm-hdr" style="background:rgba(245,158,11,.08)"><div class="pm-num" style="background:rgba(245,158,11,.2);color:#f59e0b">1</div><div><div class="pm-lbl" style="color:#f59e0b">📦 Recepción de recursos</div></div></div>
+          <div class="pm-body" id="pmb0"><div class="pm-add" onclick="trigPh(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Agregar</div></div>
+        </div>
+        <div class="pm-sec">
+          <div class="pm-hdr" style="background:rgba(59,130,246,.08)"><div class="pm-num" style="background:rgba(59,130,246,.2);color:#3b82f6">2</div><div><div class="pm-lbl" style="color:#3b82f6">🔨 Ejecución de la obra</div></div></div>
+          <div class="pm-body" id="pmb1"><div class="pm-add" onclick="trigPh(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Agregar</div></div>
+        </div>
+        <div class="pm-sec">
+          <div class="pm-hdr" style="background:rgba(16,185,129,.08)"><div class="pm-num" style="background:rgba(16,185,129,.2);color:#10b981">3</div><div><div class="pm-lbl" style="color:#10b981">✅ Finalización de la obra</div></div></div>
+          <div class="pm-body" id="pmb2"><div class="pm-add" onclick="trigPh(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Agregar</div></div>
+        </div>
+        <input type="file" id="s-ph-inp" accept="image/*" style="display:none" onchange="handleSPh(this.files)">
+        <hr class="fdiv"><div class="fsec">🎥 Video del proyecto</div>
+        <div class="fg">
+          <div class="vid-upload" onclick="document.getElementById('s-vid-inp').click()" id="vid-area">🎥 Haz clic para seleccionar un video (MP4, MOV)</div>
+          <input type="file" id="s-vid-inp" accept="video/*" style="display:none" onchange="handleVid(this.files[0])">
+          <video id="s-vid-prev" class="vid-preview" style="display:none" controls></video>
+          <div id="s-vid-name" style="font-size:11px;color:var(--text3);margin-top:4px;"></div>
+        </div>
+        <hr class="fdiv">
+        <div class="fg"><label>Nota de actualización</label><textarea id="s-note"></textarea></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
+        <button type="button" class="btn btn-gh" onclick="closeSM()">Cancelar</button>
+        <button type="submit" class="btn btn-gr" id="save-s-btn">Guardar en Firebase</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CALLE MODAL -->
+<div class="modal-overlay" id="cm-modal">
+  <div class="modal">
+    <div class="mhdr">
+      <div class="mtitle" id="cm-title">Nueva calle</div>
+      <button class="mclose" onclick="closeCM()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <form onsubmit="saveC(event)" autocomplete="off">
+      <div class="fgrid">
+        <div class="frow">
+          <div class="fg"><label>Nombre de la calle *</label><input id="c-name" type="text" required></div>
+          <div class="fg"><label>Distrito *</label>
+            <select id="c-dist" required><option value="">— Seleccionar —</option>
+              <option>Antiguo Cuscatlán</option><option>Chiltiupán</option><option>Ciudad Arce</option><option>Colón</option><option>Comasagua</option><option>Huizúcar</option><option>Jayaque</option><option>Jicalapa</option><option>La Libertad</option><option>Nuevo Cuscatlán</option><option>Quezaltepeque</option><option>San José Villanueva</option><option>San Juan Opico</option><option>San Matías</option><option>San Pablo Tacachico</option><option>Sacacoyo</option><option>Santa Tecla</option><option>Talnique</option><option>Tamanique</option><option>Teotepeque</option><option>Tepecoyo</option><option>Zaragoza</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Tipo de intervención</label><textarea id="c-tipo"></textarea></div>
+        <div class="frow3">
+          <div class="fg"><label>Km trabajados</label><input id="c-km" type="text"></div>
+          <div class="fg"><label>Familias beneficiadas</label><input id="c-fam" type="number"></div>
+          <div class="fg"><label>Días en ejecución</label><input id="c-dias" type="number"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Fecha inicio</label><input id="c-start" type="date"></div>
+          <div class="fg"><label>Fecha finalización</label><input id="c-end" type="date"></div>
+        </div>
+        <div class="fg"><label>Estado</label>
+          <select id="c-st"><option value="En proceso">En proceso</option><option value="Finalizada">Finalizada</option><option value="Pendiente">Pendiente</option><option value="Suspendida">Suspendida</option></select>
+        </div>
+        <hr class="fdiv"><div class="fsec">👤 Líder de la comunidad</div>
+        <div class="frow">
+          <div class="fg"><label>Nombre</label><input id="c-lider" type="text"></div>
+          <div class="fg"><label>Contacto</label><input id="c-tel" type="text"></div>
+        </div>
+        <hr class="fdiv">
+        <div class="fg"><label>Nota de esta semana</label><textarea id="c-note"></textarea></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px;">
+        <button type="button" class="btn btn-gh" onclick="closeCM()">Cancelar</button>
+        <button type="submit" class="btn btn-pu">Guardar en Firebase</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="lb" id="lb" onclick="closeLB()"><button class="lb-close" onclick="closeLB()">✕</button><img class="lb-img" id="lb-img" src="" alt=""></div>
+<div id="tc"></div>
+
+<!-- PIN SYSTEM -->
+<script>
+var CORRECT_PIN = '1987';
+var pinEntry = '';
+var isEditMode = false;
+
+function updatePinDots() {
+  for(var i=0;i<4;i++) {
+    var el = document.getElementById('pd'+i);
+    if(el) el.className = 'pin-dot' + (i < pinEntry.length ? ' filled' : '');
+  }
+}
+
+function pinPress(d) {
+  if(pinEntry.length >= 4) return;
+  pinEntry += d;
+  updatePinDots();
+  if(pinEntry.length === 4) {
+    if(pinEntry === CORRECT_PIN) {
+      unlockEdit();
+    } else {
+      var err = document.getElementById('pin-error');
+      if(err) err.style.display = 'block';
+      pinEntry = '';
+      updatePinDots();
+      setTimeout(function(){ if(err) err.style.display='none'; }, 2000);
+    }
+  }
+}
+
+function pinDel() {
+  pinEntry = pinEntry.slice(0,-1);
+  updatePinDots();
+}
+
+function pinView() {
+  isEditMode = false;
+  applyMode();
+  var ov = document.getElementById('pin-overlay');
+  if(ov) ov.style.display = 'none';
+}
+
+function unlockEdit() {
+  isEditMode = true;
+  applyMode();
+  var ov = document.getElementById('pin-overlay');
+  if(ov) ov.style.display = 'none';
+  // Show loading and init Firebase
+  var loading = document.getElementById('loading');
+  if(loading) loading.classList.add('show');
+  var msg = document.getElementById('loading-msg');
+  if(msg) msg.textContent = 'Cargando proyectos...';
+  // Init Firebase after PIN
+  if(window._initFirebase) window._initFirebase();
+}
+
+function lockApp() {
+  isEditMode = false;
+  pinEntry = '';
+  updatePinDots();
+  var ov = document.getElementById('pin-overlay');
+  if(ov) ov.style.display = 'flex';
+}
+
+function applyMode() {
+  var eb = document.getElementById('edit-btns');
+  var vb = document.getElementById('view-mode-badge');
+  if(eb) eb.style.display = isEditMode ? 'flex' : 'none';
+  if(vb) vb.style.display = isEditMode ? 'none' : 'flex';
+  var items = document.querySelectorAll('.edit-only');
+  for(var i=0;i<items.length;i++) {
+    items[i].style.display = isEditMode ? 'flex' : 'none';
+  }
+}
+
+function setupPIN() {
+  // Show PIN overlay on load
+  var ov = document.getElementById('pin-overlay');
+  if(ov) ov.style.display = 'flex';
+  var pad = document.getElementById('pin-pad');
+  if(!pad) { setTimeout(setupPIN, 100); return; }
+  
+  function handleBtn(e) {
+    var btn = e.target;
+    while(btn && !btn.classList.contains('pin-btn')) btn = btn.parentElement;
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if(btn.id === 'pin-del-btn') { pinDel(); return; }
+    if(btn.id === 'pin-view-btn') { pinView(); return; }
+    var d = btn.getAttribute('data-digit');
+    if(d !== null) pinPress(d);
+  }
+  
+  pad.addEventListener('mousedown', handleBtn, true);
+  pad.addEventListener('touchstart', handleBtn, {capture:true, passive:false});
+  
+  var lockBtn = document.getElementById('lock-btn');
+  if(lockBtn) lockBtn.addEventListener('mousedown', function(e){ e.preventDefault(); lockApp(); });
+}
+
+setupPIN();
+</script>
+
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA3JNM_KPM_KvM0cntymPwXJPlkRzMZWFc",
+  authDomain: "proyectos-la-libertad.firebaseapp.com",
+  projectId: "proyectos-la-libertad",
+  storageBucket: "proyectos-la-libertad.firebasestorage.app",
+  messagingSenderId: "904171957061",
+  appId: "1:904171957061:web:3f7a81f97bd9261310ec2c"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Photos/videos stored locally per device (localStorage)
+function saveLocalMedia(projectId, photos, video) {
+  try {
+    localStorage.setItem('media_'+projectId, JSON.stringify({photos, video}));
+  } catch(e) { console.warn('localStorage full, media not saved locally'); }
+}
+function getLocalMedia(projectId) {
+  try {
+    const d = localStorage.getItem('media_'+projectId);
+    return d ? JSON.parse(d) : {photos:[null,null,null], video:null};
+  } catch(e) { return {photos:[null,null,null], video:null}; }
+}
+function deleteLocalMedia(projectId) {
+  localStorage.removeItem('media_'+projectId);
+}
+
+// ── STATE ──
+let SP = [], CP = [];
+let eSID = null, eCID = null;
+let sf = 'all', cf = 'all', cdf = 'all';
+let tSM = [], tSPh = [null, null, null], curPM = 0;
+let tempVid = null, tempVidFile = null;
+let pendCSV = [];
+
+const COLORS = ['#2563eb','#10b981','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#f97316','#84cc16','#ec4899','#14b8a6'];
+const MC = ['#f59e0b','#3b82f6','#10b981'];
+const MB = ['rgba(245,158,11,.08)','rgba(59,130,246,.08)','rgba(16,185,129,.08)'];
+const MI = ['📦 Recepción de recursos','🔨 Ejecución de la obra','✅ Finalización de la obra'];
+
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+function fd(d) {
+  if (!d) return '—';
+  if (typeof d === 'number') return new Date((d-25569)*86400000).toLocaleDateString('es-SV',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const p = String(d).split('-');
+  if (p.length === 3 && p[0].length === 4) return p[2]+'/'+p[1]+'/'+p[0];
+  return d;
+}
+function chCls(s) {
+  return ({'Activo':'ch-Activo','Pausado':'ch-Pausado','Completado':'ch-Completado','En riesgo':'ch-riesgo','Finalizada':'ch-Finalizada','En proceso':'ch-proceso','Pendiente':'ch-Pendiente','Reprogramado':'ch-Reprogramado','Suspendida':'ch-Suspendida'}[s]||'ch-Activo');
+}
+function pc(p) { return p>=80?'#10b981':p>=40?'#2563eb':'#f59e0b'; }
+
+// ── LOADING ──
+function showLoading(msg) { document.getElementById('loading').classList.add('show'); document.getElementById('loading-msg').textContent = msg||'Guardando...'; }
+function hideLoading() { document.getElementById('loading').classList.remove('show'); }
+
+// ── FIREBASE LISTENERS (tiempo real) ──
+function initListeners() {
+  // Social projects - real time
+  onSnapshot(query(collection(db,'social'), orderBy('updatedAt','desc')), snap => {
+    SP = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    updCounts();
+    const v = document.querySelector('.view.active');
+    if (v) {
+      if (v.id==='view-dashboard') renderDash();
+      if (v.id==='view-social') renderS();
+      if (v.id==='view-districts') renderDist();
+    }
+  });
+  // Calles - real time
+  onSnapshot(query(collection(db,'calles'), orderBy('updatedAt','desc')), snap => {
+    CP = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    updCounts();
+    const v = document.querySelector('.view.active');
+    if (v) {
+      if (v.id==='view-dashboard') renderDash();
+      if (v.id==='view-calles') renderC();
+      if (v.id==='view-districts') renderDist();
+    }
+  });
+  setSyncStatus(true);
+  hideLoading();
+}
+
+function setSyncStatus(ok) {
+  document.getElementById('sync-dot').className = 'sync-dot' + (ok?'':' off');
+  document.getElementById('sync-status').textContent = ok ? 'Conectado · Firebase' : 'Sin conexión';
+}
+
+// Photos/videos stored locally — no cloud storage needed
+
+// ── VIEWS ──
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  const T = {dashboard:'Dashboard',social:'Proyectos Sociales',calles:'Proyectos de Calles',districts:'Distritos',imp:'Importar Calles',ds:'Detalle',dc:'Detalle de Calle'};
+  document.getElementById('tbt').innerHTML = (T[id]||id)+'<span class="tbs"></span>';
+  if (id==='dashboard') renderDash();
+  if (id==='social') renderS();
+  if (id==='calles') renderC();
+  if (id==='districts') renderDist();
+}
+window.showView = showView;
+
+// ── DASHBOARD ──
+function renderDash() {
+  const ts=SP.length, tc=CP.length;
+  document.getElementById('stats-row').innerHTML=`
+    <div class="stat-card sc-bl"><div class="slbl">Total proyectos</div><div class="sval">${ts+tc}</div><div class="ssub">${ts} social · ${tc} calles</div></div>
+    <div class="stat-card sc-gr"><div class="slbl">Sociales activos</div><div class="sval">${SP.filter(p=>p.status==='Activo').length}</div><div class="ssub">${SP.filter(p=>p.status==='Completado').length} completados</div></div>
+    <div class="stat-card sc-pu"><div class="slbl">Calles finalizadas</div><div class="sval">${CP.filter(c=>c.status==='Finalizada').length}</div><div class="ssub">de ${tc} registradas</div></div>
+    <div class="stat-card sc-am"><div class="slbl">Distritos cubiertos</div><div class="sval">${new Set([...SP.map(p=>p.district),...CP.map(c=>c.district)].filter(Boolean)).size}</div><div class="ssub">de 22 distritos</div></div>`;
+
+  const sBoard=[
+    {label:'Activos',count:SP.filter(p=>p.status==='Activo').length,color:'var(--green)',bg:'var(--greenbg)',icon:'🟢',filter:'Activo'},
+    {label:'Completados',count:SP.filter(p=>p.status==='Completado').length,color:'#60a5fa',bg:'rgba(96,165,250,.1)',icon:'✅',filter:'Completado'},
+    {label:'Pausados',count:SP.filter(p=>p.status==='Pausado').length,color:'var(--amber)',bg:'var(--amberbg)',icon:'⏸️',filter:'Pausado'},
+    {label:'En riesgo',count:SP.filter(p=>p.status==='En riesgo').length,color:'var(--red)',bg:'var(--redbg)',icon:'⚠️',filter:'En riesgo'},
+    {label:'Reprogramados',count:SP.filter(p=>p.status==='Reprogramado').length,color:'#a78bfa',bg:'rgba(167,139,250,.1)',icon:'🔄',filter:'Reprogramado'},
+  ];
+  const cBoard=[
+    {label:'Finalizadas',count:CP.filter(c=>c.status==='Finalizada').length,color:'var(--green)',bg:'var(--greenbg)',icon:'✅',filter:'Finalizada'},
+    {label:'En proceso',count:CP.filter(c=>c.status==='En proceso').length,color:'var(--purple)',bg:'var(--purplebg)',icon:'🔨',filter:'En proceso'},
+    {label:'Pendientes',count:CP.filter(c=>c.status==='Pendiente').length,color:'var(--amber)',bg:'var(--amberbg)',icon:'⏳',filter:'Pendiente'},
+    {label:'Suspendidas',count:CP.filter(c=>c.status==='Suspendida').length,color:'var(--red)',bg:'var(--redbg)',icon:'🚫',filter:'Suspendida'},
+  ];
+  document.getElementById('s-board').innerHTML=sBoard.map(b=>`<div onclick="goSF('${b.filter}')" style="background:${b.bg};border:1px solid ${b.color}33;border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .15s;flex:1;min-width:90px;text-align:center;"><div style="font-size:18px;margin-bottom:4px">${b.icon}</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:${b.color}">${b.count}</div><div style="font-size:10px;color:var(--text2);margin-top:2px">${b.label}</div></div>`).join('');
+  document.getElementById('c-board').innerHTML=cBoard.map(b=>`<div onclick="goCF('${b.filter}')" style="background:${b.bg};border:1px solid ${b.color}33;border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .15s;flex:1;min-width:90px;text-align:center;"><div style="font-size:18px;margin-bottom:4px">${b.icon}</div><div style="font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:${b.color}">${b.count}</div><div style="font-size:10px;color:var(--text2);margin-top:2px">${b.label}</div></div>`).join('');
+
+  const rs=[...SP].slice(0,4);
+  document.getElementById('dsb').textContent=ts;
+  document.getElementById('dsg').innerHTML=rs.length?rs.map(p=>sCard(p)).join(''):emptyH('Sin proyectos sociales','Crea el primero con el botón verde.');
+  const rc=[...CP].slice(0,5);
+  document.getElementById('dcb').textContent=tc;
+  document.getElementById('dcl').innerHTML=rc.length?rc.map(c=>cRow(c)).join(''):emptyH('Sin calles registradas','Importa tu Excel o agrega una.');
+}
+
+function goSF(f){sf=f;showView('social');}
+function goCF(f){cf=f;showView('calles');}
+window.goSF=goSF; window.goCF=goCF;
+
+function emptyH(t,s){return`<div class="empty-state"><div class="ei">📋</div><div class="et">${t}</div><div class="es">${s}</div></div>`;}
+
+// ── CARDS ──
+function sCard(p){
+  const localMedia=getLocalMedia(p.id);
+  const ph=localMedia.photos||[null,null,null];
+  const dots=[0,1,2].map(i=>`<div class="pdot${ph[i]?' on':''}" title="${MI[i]}"></div>`).join('');
+  return`<div class="pcard" onclick="showSD('${p.id}')">
+    <div class="tbar tbar-s"></div>
+    <div class="ptop"><span class="dpill">${p.district||'—'}</span><span class="schip ${chCls(p.status)}">${p.status}</span></div>
+    <div class="pname">${p.name}</div>
+    <div class="pdesc">${p.desc||'Sin descripción'}</div>
+    <div class="plbl"><span>Avance</span><span>${p.pct||0}%</span></div>
+    <div class="ptrack"><div class="pfill" style="width:${p.pct||0}%;background:${pc(p.pct||0)}"></div></div>
+    <div class="pmeta">${p.fecha3?`<span>✅ ${fd(p.fecha3)}</span>`:(p.fecha2?`<span>🔨 ${fd(p.fecha2)}</span>`:'')}<span>📷 ${ph.filter(Boolean).length}</span><div class="pdots">${dots}</div></div>
+  </div>`;
+}
+function cRow(c){
+  return`<div class="crow" onclick="showCD('${c.id}')">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;"><div style="font-family:'Syne',sans-serif;font-weight:600;font-size:13px;">${c.name}</div><span class="schip ${chCls(c.status)}" style="font-size:10px;">${c.status}</span></div>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--text3);"><span style="color:var(--accent2);">${c.district||'—'}</span>${c.km?`<span>📏 ${c.km}</span>`:''} ${c.familias?`<span>👥 ${c.familias} fam.</span>`:''}</div>
+  </div>`;
+}
+function cCard(c){
+  return`<div class="ccard" onclick="showCD('${c.id}')">
+    <div class="tbar tbar-c"></div>
+    <div class="ptop"><span class="dpill">${c.district||'—'}</span><span class="schip ${chCls(c.status)}">${c.status}</span></div>
+    <div class="pname">${c.name}</div>
+    <div class="pdesc">${c.tipo||'Sin descripción de intervención'}</div>
+    <div class="cstats">
+      <div class="cs"><div class="csl">Kilómetros</div><div class="csv2">${c.km||'—'}</div></div>
+      <div class="cs"><div class="csl">Familias</div><div class="csv2">${c.familias||'—'}</div></div>
+      <div class="cs"><div class="csl">Fecha inicio</div><div class="csv2">${fd(c.startDate)}</div></div>
+      <div class="cs"><div class="csl">Fecha finalización</div><div class="csv2">${fd(c.endDate)}</div></div>
+    </div>
+    <div class="pmeta">${c.lider?`<span>👤 ${c.lider}</span>`:''} ${c.contacto?`<span>📞 ${c.contacto}</span>`:''}</div>
+  </div>`;
+}
+
+// ── RENDER LISTS ──
+function renderS(){
+  const q=(document.getElementById('ss').value||'').toLowerCase();
+  const list=SP.filter(p=>(sf==='all'||p.status===sf)&&(!q||p.name.toLowerCase().includes(q)||(p.district||'').toLowerCase().includes(q)));
+  document.getElementById('sg').innerHTML=list.length?list.map(p=>sCard(p)).join(''):emptyH('Sin proyectos sociales','Prueba otro filtro.');
+}
+function setSF(f,el){sf=f;document.querySelectorAll('#view-social .fchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderS();}
+window.setSF=setSF;
+
+function renderC(){
+  const q=(document.getElementById('cs').value||'').toLowerCase();
+  const list=CP.filter(c=>(cf==='all'||c.status===cf)&&(cdf==='all'||c.district===cdf)&&(!q||c.name.toLowerCase().includes(q)||(c.district||'').toLowerCase().includes(q)));
+  document.getElementById('cg').innerHTML=list.length?list.map(c=>cCard(c)).join(''):emptyH('Sin calles','Importa tu Excel o agrega una.');
+  const used=[...new Set(CP.map(c=>c.district).filter(Boolean))].sort();
+  document.getElementById('cdf').innerHTML=used.map(d=>`<button class="fchip${cdf===d?' active':''}" onclick="setCDF('${d}')">${d}</button>`).join('')+(cdf!=='all'?`<button class="fchip" onclick="setCDF('all')" style="color:var(--red)">✕ Limpiar</button>`:'');
+}
+function setCF(f,el){cf=f;document.querySelectorAll('#view-calles .fchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderC();}
+function setCDF(d){cdf=d;renderC();}
+window.setCF=setCF; window.setCDF=setCDF;
+
+// ── DISTRICTS ──
+function renderDist(){
+  document.getElementById('dd').style.display='none';document.getElementById('dg').style.display='grid';
+  const ms=Math.max(1,...[1,...SP.map(p=>SP.filter(x=>x.district===p.district).length)]);
+  const mc=Math.max(1,...[1,...CP.map(c=>CP.filter(x=>x.district===c.district).length)]);
+  const DIST=['Antiguo Cuscatlán','Chiltiupán','Ciudad Arce','Colón','Comasagua','Huizúcar','Jayaque','Jicalapa','La Libertad','Nuevo Cuscatlán','Quezaltepeque','San José Villanueva','San Juan Opico','San Matías','San Pablo Tacachico','Sacacoyo','Santa Tecla','Talnique','Tamanique','Teotepeque','Tepecoyo','Zaragoza'];
+  document.getElementById('dg').innerHTML=DIST.map(d=>{
+    const sc=SP.filter(p=>p.district===d).length,cc=CP.filter(c=>c.district===d).length;
+    return`<div class="dist-card" onclick="showDd('${d}')"><div class="dist-name">${d}</div><div class="dist-counts"><span class="dc-s">🤝 ${sc}</span><span class="dc-c">🛣️ ${cc}</span></div><div class="dist-bar"><div class="db-s" style="width:${sc?Math.max(8,(sc/ms)*45):0}%"></div><div class="db-c" style="width:${cc?Math.max(8,(cc/mc)*45):0}%"></div></div></div>`;
+  }).join('');
+}
+function showDd(d){
+  document.getElementById('dg').style.display='none';document.getElementById('dd').style.display='block';
+  document.getElementById('ddn').textContent=d;
+  const sp=SP.filter(p=>p.district===d),cp=CP.filter(c=>c.district===d);
+  document.getElementById('dds').innerHTML=sp.length?sp.map(p=>sCard(p)).join(''):emptyH('Sin proyectos sociales','');
+  document.getElementById('ddc').innerHTML=cp.length?cp.map(c=>cRow(c)).join(''):emptyH('Sin calles','');
+}
+function hideDd(){document.getElementById('dd').style.display='none';document.getElementById('dg').style.display='grid';}
+window.showDd=showDd; window.hideDd=hideDd;
+
+// ── SOCIAL DETAIL ──
+function showSD(id){
+  const p=SP.find(x=>x.id===id);if(!p)return;
+  const color=COLORS[SP.indexOf(p)%COLORS.length];
+  const localMedia=getLocalMedia(p.id);
+  const ph=localMedia.photos||[null,null,null];
+  const vidUrl=localMedia.video||null;
+  const moms=MI.map((lbl,mi)=>{
+    const src=ph[mi];
+    const thumb=src?`<div class="ph-wrap"><img class="ph-thumb" src="${src}" onclick="openLB('${src}')"><button class="ph-del" type="button" onclick="rmSPhDet('${id}',${mi})">×</button></div>`:'';
+    const add=!src?`<div class="ph-add" onclick="addSPhDet('${id}',${mi})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>+</div>`:'';
+    return`<div class="mc"><div class="mc-hdr" style="background:${MB[mi]}"><div class="mc-num" style="background:${MC[mi]}22;color:${MC[mi]}">${mi+1}</div><div><div class="mc-lbl" style="color:${MC[mi]}">${lbl}</div><div class="mc-sub">${src?'1 foto':'Sin foto'}</div></div></div><div class="mc-photos">${thumb}${add}</div></div>`;
+  }).join('');
+  const vidHTML=vidUrl?`<div class="dcard" style="margin-bottom:16px;"><div class="dcard-t">🎥 Video del proyecto</div><video style="width:100%;border-radius:8px;margin-top:8px;" src="${vidUrl}" controls></video></div>`:'';
+  const upd=(p.log||[]).slice().reverse().map(l=>`<div class="ue"><div class="ud">${new Date(l.ts).toLocaleDateString('es-SV',{day:'2-digit',month:'short'})}</div><div class="ut">${l.note||'Actualización'}</div><div class="up">${l.pct}%</div></div>`).join('');
+  const team=(p.team||[]).map(m=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg3);padding:4px 10px;border-radius:20px;font-size:12px;margin:2px"><span style="width:18px;height:18px;border-radius:50%;background:${color};display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">${m.charAt(0).toUpperCase()}</span>${m}</span>`).join('');
+  document.getElementById('dsc').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="dpill">${p.district||'—'}</span><span class="schip ${chCls(p.status)}">${p.status}</span></div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px;">${p.name}</div>
+      <div style="font-size:13px;color:var(--text2);">${p.desc||''}</div></div>
+      <div style="display:flex;gap:7px;"><button class="btn btn-gh btn-sm" onclick="openSM('edit','${p.id}')">✏️ Editar</button><button class="btn btn-da btn-sm" onclick="delS('${p.id}')">Eliminar</button></div>
+    </div>
+    <div style="margin-bottom:18px;"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:5px;"><span>Avance general</span><span style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:${color}">${p.pct||0}%</span></div><div class="ptrack" style="height:7px;"><div class="pfill" style="width:${p.pct||0}%;background:${color}"></div></div></div>
+    <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;">📷 Registro fotográfico</div>
+    <div class="mgrid">${moms}</div>
+    ${vidHTML}
+    <div style="display:grid;grid-template-columns:1fr 290px;gap:16px;">
+      <div style="display:flex;flex-direction:column;gap:13px;">
+        <div class="dcard"><div class="dcard-t">Historial</div>${upd?`<div class="ulog">${upd}</div>`:'<div style="font-size:12px;color:var(--text3);">Sin actualizaciones.</div>'}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="dcard"><div class="dcard-t">Información</div>
+          <div class="irow"><span class="ik">Distrito</span><span class="iv" style="color:var(--accent2);">${p.district||'—'}</span></div>
+          <div class="irow"><span class="ik">📦 Entrega recursos</span><span class="iv">${fd(p.fecha1)}</span></div>
+          <div class="irow"><span class="ik">🔨 Inicio ejecución</span><span class="iv">${fd(p.fecha2)}</span></div>
+          <div class="irow"><span class="ik">✅ Finalización</span><span class="iv">${fd(p.fecha3)}</span></div>
+          <div class="irow"><span class="ik">👤 Líder</span><span class="iv">${p.lider||'—'}</span></div>
+          <div class="irow"><span class="ik">📞 Contacto</span><span class="iv">${p.tel||'—'}</span></div>
+          <div class="irow"><span class="ik">🎥 Video</span><span class="iv">${vidUrl?'Sí (local)':'No'}</span></div>
+        </div>
+        ${(p.team||[]).length?`<div class="dcard"><div class="dcard-t">Equipo</div><div style="display:flex;flex-wrap:wrap;">${team}</div></div>`:''}
+      </div>
+    </div>`;
+  showView('ds');
+}
+window.showSD=showSD;
+
+// Add/remove photos from detail
+function addSPhDet(pid, mom) {
+  let inp = document.getElementById('det-ph-inp');
+  if (!inp) { inp=document.createElement('input');inp.type='file';inp.id='det-ph-inp';inp.accept='image/*';inp.style.display='none';document.body.appendChild(inp); }
+  inp._pid=pid; inp._mom=mom; inp.value='';
+  inp.onchange = async function() {
+    const f = this.files[0]; if(!f) return;
+    showLoading('Subiendo foto a Firebase...');
+    try {
+      const reader = new FileReader();
+      reader.onload = async e => {
+        const url = await uploadPhoto(e.target.result, `photos/${pid}/moment_${mom}`);
+        const p = SP.find(x=>x.id===pid); if(!p) return;
+        const photos = p.photos ? [...p.photos] : [null,null,null];
+        photos[mom] = url;
+        await setDoc(doc(db,'social',pid), {...p, photos, updatedAt:Date.now()});
+        hideLoading(); toast('Foto guardada en Firebase ✓','success'); showSD(pid);
+      };
+      reader.readAsDataURL(f);
+    } catch(e) { hideLoading(); toast('Error al subir foto','error'); }
+  };
+  inp.click();
+}
+async function rmSPhDet(pid, mom) {
+  const p = SP.find(x=>x.id===pid); if(!p) return;
+  if(!confirm('¿Eliminar esta foto?')) return;
+  showLoading('Eliminando...');
+  try {
+    const photos = p.photos ? [...p.photos] : [null,null,null];
+    photos[mom] = null;
+    await setDoc(doc(db,'social',pid), {...p, photos, updatedAt:Date.now()});
+    hideLoading(); toast('Foto eliminada','error'); showSD(pid);
+  } catch(e) { hideLoading(); toast('Error','error'); }
+}
+window.addSPhDet=addSPhDet; window.rmSPhDet=rmSPhDet;
+
+// ── CALLE DETAIL ──
+function showCD(id){
+  const c=CP.find(x=>x.id===id);if(!c)return;
+  const upd=(c.log||[]).slice().reverse().map(l=>`<div class="ue"><div class="ud">${new Date(l.ts).toLocaleDateString('es-SV',{day:'2-digit',month:'short'})}</div><div class="ut">${l.note||'—'}</div></div>`).join('');
+  document.getElementById('dcc').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;">
+      <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;"><span class="dpill">${c.district||'—'}</span><span class="schip ${chCls(c.status)}">${c.status}</span></div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:4px;">${c.name}</div></div>
+      <div style="display:flex;gap:7px;"><button class="btn btn-gh btn-sm" onclick="openCM('edit','${c.id}')">✏️ Editar</button><button class="btn btn-da btn-sm" onclick="delC('${c.id}')">Eliminar</button></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:13px;">
+      <div class="dcard"><div class="dcard-t">Detalles de la intervención</div>
+        <div style="font-size:13px;color:var(--text2);padding:10px 0;border-bottom:1px solid var(--border);line-height:1.6;"><span style="color:var(--text3);font-size:12px;display:block;margin-bottom:4px;">Tipo de intervención</span>${c.tipo||'—'}</div>
+        <div class="irow"><span class="ik">Kilómetros trabajados</span><span class="iv">${c.km||'—'}</span></div>
+        <div class="irow"><span class="ik">Familias beneficiadas</span><span class="iv">${c.familias||'—'}</span></div>
+        <div class="irow"><span class="ik">Días en ejecución</span><span class="iv">${c.dias||'—'}</span></div>
+        <div class="irow"><span class="ik">Fecha inicio</span><span class="iv">${fd(c.startDate)}</span></div>
+        <div class="irow"><span class="ik">Fecha finalización</span><span class="iv">${fd(c.endDate)}</span></div>
+      </div>
+      <div class="dcard"><div class="dcard-t">Líder comunitario</div>
+        <div class="irow"><span class="ik">Nombre</span><span class="iv">${c.lider||'—'}</span></div>
+        <div class="irow"><span class="ik">Contacto</span><span class="iv">${c.contacto||'—'}</span></div>
+        <div class="irow"><span class="ik">Distrito</span><span class="iv" style="color:var(--accent2);">${c.district||'—'}</span></div>
+      </div>
+      ${upd?`<div class="dcard"><div class="dcard-t">Historial de notas</div><div class="ulog">${upd}</div></div>`:''}
+    </div>`;
+  showView('dc');
+}
+window.showCD=showCD;
+
+// ── SOCIAL MODAL ──
+function trigPh(mi){curPM=mi;const i=document.getElementById('s-ph-inp');i.value='';i.click();}
+function handleSPh(files){
+  if(tSPh[curPM]){toast('Solo 1 foto por momento. Elimina la actual primero.','error');return;}
+  const f=files[0];if(!f)return;
+  const r=new FileReader();r.onload=e=>{tSPh[curPM]=e.target.result;renderPMB(curPM);};r.readAsDataURL(f);
+}
+function rmMPh(mi){tSPh[mi]=null;renderPMB(mi);}
+function renderPMB(mi){
+  const b=document.getElementById('pmb'+mi);if(!b)return;
+  const src=tSPh[mi];
+  const thumb=src?`<div class="pm-tw"><img class="pm-th" src="${src}" onclick="openLB('${src}')"><button class="pm-rm" type="button" onclick="rmMPh(${mi})">×</button></div>`:'';
+  const add=!src?`<div class="pm-add" onclick="trigPh(${mi})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Agregar</div>`:'';
+  b.innerHTML=thumb+add;
+}
+window.trigPh=trigPh; window.rmMPh=rmMPh;
+
+function handleVid(file){
+  if(!file)return;
+  tempVidFile=file;
+  const url=URL.createObjectURL(file);
+  document.getElementById('s-vid-prev').src=url;document.getElementById('s-vid-prev').style.display='block';
+  document.getElementById('s-vid-name').textContent='✓ '+file.name;
+  document.getElementById('vid-area').textContent='🎥 Video seleccionado — haz clic para cambiar';
+}
+window.handleVid=handleVid;
+
+function openSM(mode, id) {
+  tSM=[];tSPh=[null,null,null];tempVid=null;tempVidFile=null;
+  document.getElementById('s-mtags').innerHTML='';
+  [0,1,2].forEach(i=>renderPMB(i));
+  document.getElementById('s-vid-prev').style.display='none';
+  document.getElementById('s-vid-prev').src='';
+  document.getElementById('s-vid-name').textContent='';
+  document.getElementById('vid-area').textContent='🎥 Haz clic para seleccionar un video (MP4, MOV)';
+  if(mode==='edit'&&id){
+    const p=SP.find(x=>x.id===id);if(!p)return;eSID=id;
+    document.getElementById('sm-title').textContent='Editar proyecto social';
+    document.getElementById('s-name').value=p.name||'';
+    document.getElementById('s-dist').value=p.district||'';
+    document.getElementById('s-desc').value=p.desc||'';
+    document.getElementById('s-st').value=p.status||'Activo';
+    document.getElementById('s-pct').value=p.pct||0;
+    document.getElementById('s-pct-l').textContent=(p.pct||0)+'%';
+    document.getElementById('s-fecha1').value=p.fecha1||'';
+    document.getElementById('s-fecha2').value=p.fecha2||'';
+    document.getElementById('s-fecha3').value=p.fecha3||'';
+    document.getElementById('s-lider').value=p.lider||'';
+    document.getElementById('s-tel').value=p.tel||'';
+    document.getElementById('s-note').value='';
+    tSM=[...(p.team||[])];
+    const editMedia=getLocalMedia(id);
+    tSPh=editMedia.photos||[null,null,null];
+    tempVid=editMedia.video||null;
+    if(tempVid){document.getElementById('s-vid-prev').src=tempVid;document.getElementById('s-vid-prev').style.display='block';document.getElementById('vid-area').textContent='🎥 Video guardado — haz clic para cambiar';}
+    renderSMtags();[0,1,2].forEach(i=>renderPMB(i));
+  }else{
+    eSID=null;
+    document.getElementById('sm-title').textContent='Nuevo proyecto social';
+    ['s-name','s-desc','s-fecha1','s-fecha2','s-fecha3','s-lider','s-tel','s-note'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('s-dist').value='';document.getElementById('s-st').value='Activo';
+    document.getElementById('s-pct').value=0;document.getElementById('s-pct-l').textContent='0%';
+  }
+  document.getElementById('sm-modal').classList.add('open');
+}
+function closeSM(){document.getElementById('sm-modal').classList.remove('open');}
+function addSMem(){const i=document.getElementById('s-mem');const v=i.value.trim();if(!v||tSM.includes(v)){i.value='';return;}tSM.push(v);i.value='';renderSMtags();}
+function rmSMem(m){tSM=tSM.filter(x=>x!==m);renderSMtags();}
+function renderSMtags(){document.getElementById('s-mtags').innerHTML=tSM.map(m=>`<div class="mtag">${m}<button type="button" onclick="rmSMem('${m}')">×</button></div>`).join('');}
+window.openSM=openSM; window.closeSM=closeSM; window.addSMem=addSMem; window.rmSMem=rmSMem;
+
+async function saveS(e){
+  e.preventDefault();
+  showLoading('Guardando en Firebase...');
+  try {
+    const pct=parseInt(document.getElementById('s-pct').value)||0;
+    const note=document.getElementById('s-note').value.trim();
+    const id=eSID||uid();
+    // Save photos/video locally on this device
+    let videoUrl=tempVid||null;
+    if(tempVidFile){
+      const vr=new FileReader();
+      await new Promise(res=>{vr.onload=e=>{videoUrl=e.target.result;res();};vr.readAsDataURL(tempVidFile);});
+    }
+    saveLocalMedia(id, tSPh, videoUrl);
+    const existing=SP.find(x=>x.id===id);
+    const log=existing?[...(existing.log||[])]:(note?[{ts:Date.now(),pct,note}]:[]);
+    if(note&&existing)log.push({ts:Date.now(),pct,note});
+    // Only save text data to Firestore (no photos/video)
+    const data={
+      name:document.getElementById('s-name').value.trim(),
+      district:document.getElementById('s-dist').value,
+      desc:document.getElementById('s-desc').value,
+      status:document.getElementById('s-st').value,
+      pct,fecha1:document.getElementById('s-fecha1').value,
+      fecha2:document.getElementById('s-fecha2').value,fecha3:document.getElementById('s-fecha3').value,
+      lider:document.getElementById('s-lider').value,tel:document.getElementById('s-tel').value,
+      team:[...tSM],log,
+      updatedAt:Date.now(),createdAt:existing?existing.createdAt:Date.now()
+    };
+    await setDoc(doc(db,'social',id),data);
+    hideLoading();closeSM();toast('Proyecto guardado en Firebase ✓','success');
+  } catch(err){hideLoading();toast('Error: '+err.message,'error');console.error(err);}
+}
+
+async function delS(id){
+  if(!confirm('¿Eliminar este proyecto de Firebase?'))return;
+  showLoading('Eliminando...');
+  await deleteDoc(doc(db,'social',id));
+  deleteLocalMedia(id);
+  hideLoading();showView('social');toast('Proyecto eliminado','error');
+}
+window.delS=delS;
+
+// ── CALLE MODAL ──
+function openCM(mode,id){
+  if(mode==='edit'&&id){
+    const c=CP.find(x=>x.id===id);if(!c)return;eCID=id;
+    document.getElementById('cm-title').textContent='Editar calle';
+    document.getElementById('c-name').value=c.name||'';document.getElementById('c-dist').value=c.district||'';
+    document.getElementById('c-tipo').value=c.tipo||'';document.getElementById('c-km').value=c.km||'';
+    document.getElementById('c-fam').value=c.familias||'';document.getElementById('c-dias').value=c.dias||'';
+    document.getElementById('c-start').value=c.startDate||'';document.getElementById('c-end').value=c.endDate||'';
+    document.getElementById('c-st').value=c.status||'En proceso';
+    document.getElementById('c-lider').value=c.lider||'';document.getElementById('c-tel').value=c.contacto||'';
+    document.getElementById('c-note').value='';
+  }else{
+    eCID=null;document.getElementById('cm-title').textContent='Nueva calle';
+    ['c-name','c-tipo','c-km','c-fam','c-dias','c-start','c-end','c-lider','c-tel','c-note'].forEach(i=>document.getElementById(i).value='');
+    document.getElementById('c-dist').value='';document.getElementById('c-st').value='En proceso';
+  }
+  document.getElementById('cm-modal').classList.add('open');
+}
+function closeCM(){document.getElementById('cm-modal').classList.remove('open');}
+window.openCM=openCM; window.closeCM=closeCM;
+
+async function saveC(e){
+  e.preventDefault();
+  showLoading('Guardando calle en Firebase...');
+  try {
+    const note=document.getElementById('c-note').value.trim();
+    const id=eCID||uid();
+    const existing=CP.find(x=>x.id===id);
+    const log=existing?[...(existing.log||[])]:(note?[{ts:Date.now(),note}]:[]);
+    if(note&&existing)log.push({ts:Date.now(),note});
+    const data={
+      name:document.getElementById('c-name').value,district:document.getElementById('c-dist').value,
+      tipo:document.getElementById('c-tipo').value,km:document.getElementById('c-km').value,
+      familias:document.getElementById('c-fam').value,dias:document.getElementById('c-dias').value,
+      startDate:document.getElementById('c-start').value,endDate:document.getElementById('c-end').value,
+      status:document.getElementById('c-st').value||'En proceso',
+      lider:document.getElementById('c-lider').value,contacto:document.getElementById('c-tel').value,
+      log,updatedAt:Date.now(),createdAt:existing?existing.createdAt:Date.now()
+    };
+    await setDoc(doc(db,'calles',id),data);
+    hideLoading();closeCM();toast('Calle guardada en Firebase ✓','success');
+  } catch(err){hideLoading();toast('Error: '+err.message,'error');}
+}
+
+async function delC(id){
+  if(!confirm('¿Eliminar esta calle de Firebase?'))return;
+  showLoading('Eliminando...');
+  await deleteDoc(doc(db,'calles',id));
+  hideLoading();showView('calles');toast('Calle eliminada','error');
+}
+window.delC=delC;
+
+// ── IMPORT CALLES CSV ──
+function dov(e,id){e.preventDefault();}
+function cdrop2(e){e.preventDefault();const f=e.dataTransfer.files[0];if(f)handleCCSV(f);}
+function handleCCSV(file){
+  const r=new FileReader();
+  r.onload=function(e){
+    const lines=e.target.result.split('\n').filter(l=>l.trim());
+    if(lines.length<2){toast('Archivo vacío','error');return;}
+    const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
+    const rows=lines.slice(1).map(l=>{const vals=l.split(',').map(v=>v.trim().replace(/^"|"$/g,''));const o={};headers.forEach((h,i)=>o[h]=vals[i]||'');return o;}).filter(r=>r[headers[0]]);
+    pendCSV=rows;
+    document.getElementById('ccnt').textContent=rows.length+' filas';
+    document.getElementById('ctbl').innerHTML=`<tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr>`+rows.slice(0,10).map(r=>`<tr>${headers.map(h=>`<td>${r[h]||''}</td>`).join('')}</tr>`).join('');
+    document.getElementById('cprev').style.display='block';
+  };r.readAsText(file);
+}
+async function impCalles(){
+  showLoading('Importando calles a Firebase...');
+  let added=0,updated=0;
+  const mapSt=s=>{if(!s)return'En proceso';const l=s.toLowerCase();if(l.includes('finaliz'))return'Finalizada';if(l.includes('pendi'))return'Pendiente';if(l.includes('suspend'))return'Suspendida';return'En proceso';};
+  for(const row of pendCSV){
+    const name=row['CALLE']||row['calle']||row['nombre']||'';
+    const dist=row['DISTRITO']||row['distrito']||'';
+    if(!name)continue;
+    const ex=CP.find(c=>c.name.toLowerCase()===name.toLowerCase()&&(!dist||c.district===dist));
+    const data={name,district:dist,tipo:row['TIPO DE INTERVENCIÓN']||row['tipo']||'',km:row['KILÓMETROS TRABAJADOS']||row['km']||'',familias:row['FAMILIAS BENEFICIADAS']||row['familias']||'',dias:row['DÍAS EN EJECUCIÓN']||row['dias']||'',startDate:row['FECHA DE INICIO DE INTERVENCIÓN']||row['fecha_inicio']||'',endDate:row['FECHA DE FINALIZACIÓN DE INTERVENCIÓN']||row['fecha_cierre']||'',lider:row['LÍDER DE LA COMUNIDAD']||row['lider']||'',contacto:row['CONTACTO']||row['contacto']||'',status:mapSt(row['estado']||''),updatedAt:Date.now(),createdAt:ex?ex.createdAt:Date.now(),log:ex?ex.log||[]:[],};
+    const id=ex?ex.id:uid();
+    await setDoc(doc(db,'calles',id),data);
+    ex?updated++:added++;
+  }
+  hideLoading();document.getElementById('cprev').style.display='none';pendCSV=[];
+  toast(`Firebase: ${added} nuevas, ${updated} actualizadas ✓`,'success');showView('calles');
+}
+function dlTpl(){
+  const csv=`DISTRITO,CALLE,FAMILIAS BENEFICIADAS,TIPO DE INTERVENCIÓN,KILÓMETROS TRABAJADOS,FECHA DE INICIO DE INTERVENCIÓN,FECHA DE FINALIZACIÓN DE INTERVENCIÓN,DÍAS EN EJECUCIÓN,LÍDER DE LA COMUNIDAD,CONTACTO\nLA LIBERTAD,CALLE EL CAOBA,350,Conformación de calle y balastro,1.8 KM,2025-01-10,2025-01-21,11,SANTOS LÓPEZ,7223-0665`;
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='plantilla_calles.csv';a.click();
+}
+window.dov=dov; window.cdrop2=cdrop2; window.handleCCSV=handleCCSV; window.impCalles=impCalles; window.dlTpl=dlTpl;
+
+function openLB(src){document.getElementById('lb-img').src=src;document.getElementById('lb').classList.add('open');}
+function closeLB(){document.getElementById('lb').classList.remove('open');}
+window.openLB=openLB; window.closeLB=closeLB;
+
+function updCounts(){document.getElementById('sc').textContent=SP.length;document.getElementById('cc').textContent=CP.length;}
+function toast(msg,type='success'){const t=document.createElement('div');t.className='toast '+type;t.textContent=(type==='success'?'✓ ':type==='error'?'✕ ':'ℹ ')+msg;document.getElementById('tc').appendChild(t);setTimeout(()=>t.remove(),4000);}
+
+// ── PIN SYSTEM ──
+const CORRECT_PIN = '1987';
+let pinEntry = '';
+let isEditMode = false;
+
+function pinPress(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d;
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    setTimeout(() => {
+      if (pinEntry === CORRECT_PIN) {
+        unlockEdit();
+      } else {
+        document.getElementById('pin-error').style.display = 'block';
+        pinEntry = '';
+        updatePinDots();
+        setTimeout(() => document.getElementById('pin-error').style.display='none', 2000);
+      }
+    }, 200);
+  }
+}
+
+function pinDel() {
+  pinEntry = pinEntry.slice(0,-1);
+  updatePinDots();
+}
+
+function updatePinDots() {
+  for(let i=0;i<4;i++) {
+    document.getElementById('pd'+i).className = 'pin-dot' + (i < pinEntry.length ? ' filled' : '');
+  }
+}
+
+function pinView() {
+  isEditMode = false;
+  applyMode();
+  document.getElementById('pin-overlay').style.display = 'none';
+  // Show loading and connect Firebase after PIN
+}
+
+
+
+// lockApp handled by global script
+const _origShowCD = window.showCD;
+window.showCD = function(id) {
+  _origShowCD(id);
+  if (!window.isEditMode) {
+    document.querySelectorAll('#dcc .btn-gh, #dcc .btn-da').forEach(b => b.style.display='none');
+  }
+};
+
+// ── INIT ──
+document.getElementById('td').textContent=new Date().toLocaleDateString('es-SV',{weekday:'short',year:'numeric',month:'short',day:'numeric'});
+// Don't start Firebase until user passes PIN screen
+// initListeners() is called after PIN entry
+</script>
+</body>
+</html>
